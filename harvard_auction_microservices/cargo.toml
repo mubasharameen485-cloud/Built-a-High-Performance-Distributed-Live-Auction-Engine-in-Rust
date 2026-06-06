@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "shared_protos",
+    "api_gateway",
+    "auth_service",
+    "auction_service"
+]
+resolver = "2"

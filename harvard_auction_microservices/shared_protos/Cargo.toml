@@ -1,0 +1,13 @@
+[package]
+name = "shared_protos"
+version = "0.1.0"
+edition = "2021"
+
+# Asal libraries jo code mein use hongi
+[dependencies]
+tonic = "0.11"   # gRPC ka Rust framework
+prost = "0.12"   # Protocol Buffers ko Rust structs mein badalne wali library
+
+# Build dependencies sirf compile time (build.rs) par chalti hain
+[build-dependencies]
+tonic-build = "0.11" # .proto files ko Rust code mein translate karne wala tool

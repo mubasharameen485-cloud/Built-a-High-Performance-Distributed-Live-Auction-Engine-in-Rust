@@ -1,0 +1,48 @@
+// shared_protos/proto/auth.proto
+
+// Syntax version 3 use kar rahe hain jo latest hai
+syntax = "proto3";
+
+// Package ka naam (Rust mein yeh module ban jayega)
+package auth;
+
+// ==========================================
+// THE SERVICE (Asal gRPC Server ke Functions)
+// ==========================================
+service AuthService {
+    // 1. Signup ka route
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+    
+    // 2. Login ka route
+    rpc Login (LoginRequest) returns (LoginResponse);
+}
+
+// ==========================================
+// THE MESSAGES (Data Models / JSON ki tarah)
+// ==========================================
+
+// Signup ke liye kya data aayega?
+message RegisterRequest {
+    string username = 1; // '1' iska unique ID/Tag hai (gRPC ka asool)
+    string password = 2;
+}
+
+// Signup ke baad kya wapas jayega?
+message RegisterResponse {
+    bool success = 1;
+    string message = 2;
+    int32 user_id = 3;
+}
+
+// Login ke liye kya data aayega?
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+// Login ke baad kya wapas jayega?
+message LoginResponse {
+    bool success = 1;
+    string token = 2; // JWT Token yahan aayega
+    string message = 3;
+}

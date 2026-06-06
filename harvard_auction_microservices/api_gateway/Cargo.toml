@@ -1,0 +1,19 @@
+[package]
+name = "api_gateway"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.7", features = ["ws", "macros"] }
+tokio = { version = "1.36", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# gRPC Client banne ke liye
+tonic = "0.11"
+
+# JADOO: Hamari apni banayi hui library link ho rahi hai!
+shared_protos = { path = "../shared_protos" }

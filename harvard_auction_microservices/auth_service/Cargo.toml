@@ -1,0 +1,22 @@
+[package]
+name = "auth_service"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.36", features = ["full"] }
+tonic = "0.11"
+sqlx = { version = "0.7", features = ["postgres", "runtime-tokio-rustls"] }
+dotenvy = "0.15"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Security Libraries
+argon2 = "0.5"
+jsonwebtoken = "9.2"
+chrono = "0.4"
+rand = "0.8"
+
+# Hamari apni banayi hui library
+shared_protos = { path = "../shared_protos" }
+serde = { version = "1.0", features = ["derive"] }

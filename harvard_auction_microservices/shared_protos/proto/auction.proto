@@ -1,0 +1,86 @@
+// shared_protos/proto/auction.proto
+syntax = "proto3";
+package auction;
+
+service AuctionService {
+    // Admin ke liye
+    rpc CreateItem (CreateItemRequest) returns (ItemResponse);
+    
+    // User ke liye
+    rpc PlaceBid (PlaceBidRequest) returns (BidResponse);
+    
+    // NAYA: Page refresh par data lane ke liye
+    rpc GetActiveItem (Empty) returns (ActiveItemResponse);
+    rpc GetItemBids (ItemRequest) returns (BidsListResponse);
+    rpc GetItemChats (ItemRequest) returns (ChatsListResponse);
+    
+    // NAYA: Live Chat save karne ke liye
+    rpc SaveChat (SaveChatRequest) returns (Empty);
+}
+
+// --- Messages ---
+
+message Empty {}
+
+message ItemRequest {
+    int32 item_id = 1;
+}
+
+message CreateItemRequest {
+    string name = 1;
+    string description = 2;
+    double starting_price = 3;
+    string image_url = 4; // NAYA: Image URL
+}
+
+message ItemResponse {
+    int32 item_id = 1;
+    string message = 2;
+}
+
+message ActiveItemResponse {
+    int32 item_id = 1;
+    string name = 2;
+    string description = 3;
+    double current_price = 4;
+    string image_url = 5;
+}
+
+message PlaceBidRequest {
+    int32 item_id = 1;
+    int32 user_id = 2;
+    double bid_amount = 3;
+}
+
+message BidResponse {
+    bool success = 1;
+    string message = 2;
+    double new_price = 3;
+}
+
+// NAYA: Chat Messages
+message SaveChatRequest {
+    int32 item_id = 1;
+    string sender = 2;
+    string content = 3;
+}
+
+message ChatMessage {
+    string sender = 1;
+    string content = 2;
+    string created_at = 3;
+}
+
+message ChatsListResponse {
+    repeated ChatMessage chats = 1;
+}
+
+message BidRecord {
+    int32 user_id = 1;
+    double amount = 2;
+    string created_at = 3;
+}
+
+message BidsListResponse {
+    repeated BidRecord bids = 1;
+}
